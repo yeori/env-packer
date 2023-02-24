@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import path from "path";
 import { defineConfig } from "vite";
 
@@ -14,6 +15,15 @@ export default defineConfig({
     },
     rollupOptions: {
       external: ["crypto-js"],
+    },
+  },
+  resolve: {
+    mainFields: ["main"],
+    alias: [{ find: "@", replacement: path.resolve(__dirname, "./src") }],
+  },
+  test: {
+    coverage: {
+      provider: "istanbul",
     },
   },
 });
