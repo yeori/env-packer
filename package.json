@@ -1,17 +1,25 @@
 {
   "name": "env-teleport",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
+  "main": "dist/env-teleport.cjs.js",
+  "module": "dist/env-teleport.cjs.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test:unit": "vitest --run --reporter verbose",
+    "test:file": "vitest --run --reporter verbose -t",
+    "report": "vitest run --coverage"
   },
   "devDependencies": {
+    "@types/crypto-js": "^4.1.1",
     "@types/node": "^18.14.1",
-    "typescript": "^4.9.3",
-    "vite": "^4.1.0"
+    "@vitest/coverage-istanbul": "^0.28.5",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.0",
+    "vitest": "^0.28.5"
   },
   "dependencies": {
     "crypto-js": "^4.1.1"
