@@ -1,5 +1,5 @@
 import { it, expect, describe } from "vitest";
-import hashing from "../../src/util/hasing";
+import hashing from "../../src/util/hashing";
 
 const text = "Night";
 const expected = [

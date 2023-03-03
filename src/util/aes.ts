@@ -1,5 +1,5 @@
 import crypto from "crypto-js";
-import hasing from "./hasing.js";
+import hashing from "./hashing.js";
 
 export interface AesResponse {
   readonly output: string;
@@ -9,8 +9,8 @@ export interface AesResponse {
 const toWordArray = crypto.enc.Utf8.parse;
 
 const generateSeed = (text: string): string => {
-  const s0: string = hasing.sha256(text, 128);
-  const s1: string = hasing.sha256(s0, 128);
+  const s0: string = hashing.sha256(text, 128);
+  const s1: string = hashing.sha256(s0, 128);
   return s0 + s1;
 };
 

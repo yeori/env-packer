@@ -1,5 +1,5 @@
-import hasing from "./hasing.js";
+import hashing from "./hashing.js";
 import files from "./files.js";
 import rsa from "./rsa.js";
 import aes from "./aes.js";
-export { rsa, aes, hasing, files };
+export { rsa, aes, hashing, files };

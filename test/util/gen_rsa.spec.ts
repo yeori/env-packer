@@ -6,7 +6,6 @@ const RSA_PRV_FILE = ".rsa_key.test";
 const RSA_PUB_FILE = ".rsa_key.test.pub";
 
 afterAll(() => {
-  console.log("[DELETE KEY FILES]");
   fs.unlinkSync(RSA_PRV_FILE);
   fs.unlinkSync(RSA_PUB_FILE);
 });

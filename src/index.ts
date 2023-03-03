@@ -1,4 +1,4 @@
-import cryptoUtil from "./crypto-util.js";
+import { aes } from "./util/index.js";
 import type { AesResponse } from "./util/aes.js";
 import { files, rsa } from "./util/index.js";
 import { IFile } from "./util/files.js";
@@ -41,7 +41,7 @@ const generatePackedFile = (cipher: AesResponse, encOption: EncryptOption) => {
 };
 const pack = (sources: Array<IFile>, option: EncryptOption) => {
   const json = JSON.stringify(sources);
-  const cipher = cryptoUtil.aes.encrypt(json);
+  const cipher = aes.encrypt(json);
   generatePackedFile(cipher, option);
 };
 
@@ -54,7 +54,7 @@ const generateEnvFiles = (sources: Array<IFile>) => {
 const unpackEnv = (option: DecryptOption) => {
   const rsaKey = files.read(option.key);
   const seed = rsa.decrypt(option.seed, rsaKey);
-  const jsonText = cryptoUtil.aes.decrypt(option.body, seed);
+  const jsonText = aes.decrypt(option.body, seed);
   const sources: Array<IFile> = JSON.parse(jsonText);
   generateEnvFiles(sources);
 };
