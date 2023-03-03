@@ -1,9 +1,9 @@
 import { it, expect, describe, assert, afterAll } from "vitest";
-import generateRsa from "../../src/util/rsa_gen";
+import rsa from "../../src/util/rsa";
 import fs from "fs";
 
-const RSA_PRV_FILE = ".rsa_key";
-const RSA_PUB_FILE = ".rsa_key.pub";
+const RSA_PRV_FILE = ".rsa_key.test";
+const RSA_PUB_FILE = ".rsa_key.test.pub";
 
 afterAll(() => {
   console.log("[DELETE KEY FILES]");
@@ -11,8 +11,10 @@ afterAll(() => {
   fs.unlinkSync(RSA_PUB_FILE);
 });
 describe("RSA", () => {
-  it("key files", () => {
-    const rsa = generateRsa(2048, {
+  const { generateKeyPair } = rsa;
+  it("gnerate files", () => {
+    const rsa = generateKeyPair({
+      keySize: 2048,
       file: RSA_PRV_FILE,
     });
     assert.isTrue(fs.existsSync(RSA_PRV_FILE));
@@ -20,8 +22,9 @@ describe("RSA", () => {
   });
 
   it("callback", () => {
-    const rsa = generateRsa(2048, {
-      after: (key) => {
+    const rsa = generateKeyPair({
+      keySize: 2048,
+      withKeys: (key) => {
         assert.isNotEmpty(key.publicKey);
         assert.isNotEmpty(key.privateKey);
       },
@@ -32,7 +35,7 @@ describe("RSA", () => {
     fs.writeFileSync(RSA_PRV_FILE, "");
     fs.writeFileSync(RSA_PUB_FILE, "");
     expect(() => {
-      generateRsa(2048, { file: RSA_PRV_FILE });
+      generateKeyPair({ keySize: 2048, file: RSA_PRV_FILE });
     }).toThrowError();
   });
 });

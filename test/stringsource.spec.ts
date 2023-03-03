@@ -1,12 +1,17 @@
 import { it, describe } from "vitest";
-import teleport from "../src";
+import teleport from "../src/index.js";
 
-describe("TEXT", () => {
+describe("index", () => {
   it("TEXT", () => {
     const sources = [
-      { name: ".env.development", content: "VITE_APP_MODE=DEV" },
-      { name: ".env.production", content: "VITE_APP_MODE=PROD" },
+      { path: ".env.development", content: "VITE_APP_MODE=DEV" },
+      { path: ".env.production", content: "VITE_APP_MODE=PROD" },
     ];
-    teleport.encrypt(sources, ".env.njns");
+    teleport.pack(sources, {
+      pubKey: ".rsa_key.pub",
+      privKey: ".keys/.rsa_key",
+      outputPath: "env-teleport-config.json",
+    });
   });
+  it("TEXT:dec", () => {});
 });
